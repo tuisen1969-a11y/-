@@ -1,16 +1,32 @@
-- name: Install dependencies
-  run: |
-    sudo apt update
+name: Build APK
 
-    sudo apt install -y \
-      git zip unzip \
-      openjdk-17-jdk \
-      python3-pip \
-      autoconf automake \
-      libtool pkg-config \
-      cmake \
-      libffi-dev \
-      libssl-dev
+on:
+  workflow_dispatch:
 
-    pip install --upgrade pip
-    pip install buildozer cython
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+
+          sudo apt install -y \
+            git \
+            zip \
+            unzip \
+            openjdk-17-jdk \
+            python3-pip \
+            autoconf \
+            automake \
+            libtool \
+            pkg-config \
+            cmake \
+            libffi-dev \
+            libssl-dev
+
+          pip install --upgrade pip
+          pip install buildozer cython
